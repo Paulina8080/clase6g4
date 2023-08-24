@@ -1,3 +1,4 @@
+#import datatime
 class Medicamento:
     def __init__(self):
         self.__nombre = "" 
@@ -51,17 +52,22 @@ class Mascota:
     
 class sistemaV:
     def __init__(self):
-        self.__lista_mascotas = []
+        self.__lista_mascotas = {"Caninos": [], "Felinos":[]}
+
     
     def verificarExiste(self,historia):
-        for m in self.__lista_mascotas:
-            if historia == m.verHistoria():
-                return True
+        if historia in self.__lista_mascotas:
+            return True
+        else:
+            return False
+        #for m in self.__lista_mascotas:
+         #   if historia == m.verHistoria():
+          #      return True
         #solo luego de haber recorrido todo el ciclo se retorna False
-        return False
+        #return False
         
     def verNumeroMascotas(self):
-        return len(self.__lista_mascotas) 
+        return len(self.__lista_mascotas["Caninos"]) + len(self.__lista_mascotas["Felinos"]) #Creo que va así para sumar listas
     
     def ingresarMascota(self,mascota):
         self.__lista_mascotas.append(mascota) 
@@ -116,11 +122,17 @@ def main():
 
                 for i in range(0,nm):
                     nombre_medicamentos = input("Ingrese el nombre del medicamento: ")
-                    dosis =int(input("Ingrese la dosis: "))
-                    medicamento = Medicamento()
-                    medicamento.asignarNombre(nombre_medicamentos)
-                    medicamento.asignarDosis(dosis)
-                    lista_med.append(medicamento)
+                    for n in lista_med: #aquí pregunto si el nombre que acabo de ingresar ya está en la lista
+                        if nombre_medicamentos == n:
+                            print("Este medicamento ya se encuentra en la lista")
+                            continue
+                        else:
+                            dosis =int(input("Ingrese la dosis: "))
+                            medicamento = Medicamento()
+                            medicamento.asignarNombre(nombre_medicamentos)
+                            medicamento.asignarDosis(dosis)
+                            lista_med.append(medicamento)
+
 
                 mas= Mascota()
                 mas.asignarNombre(nombre)
